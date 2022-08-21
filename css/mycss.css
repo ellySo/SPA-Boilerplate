@@ -7,8 +7,37 @@ ul, li {
   list-style: none;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 .section {
   min-height: 600px;
+}
+
+#gnb .scrollPage {
+  position: relative;
+  text-decoration: none;
+}
+#gnb .scrollPage:after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  width: 0;
+  background-color: rgba(11, 30, 144, 0.9);
+  transition: 0.5s;
+  margin: 5px auto 0;
+}
+#gnb .scrollPage.on:after, #gnb .scrollPage:hover:after {
+  width: 100%;
+}
+
+a.scrollPage:hover,
+a.scrollPage.on {
+  color: rgba(11, 30, 144, 0.9) !important;
 }
 
 #main_banner {
@@ -32,6 +61,34 @@ ul, li {
   display: block;
   position: relative;
   padding: 5.375rem 0 8.375rem;
+}
+#happy_thumb .decoration .deco_question {
+  right: 24.5rem;
+  top: -48rem;
+  z-index: -1;
+  width: 30.6875rem;
+  height: 100.5rem;
+  opacity: 0.25;
+}
+#happy_thumb .decoration .deco_dots_two {
+  top: 4.375rem;
+  left: 50%;
+  margin-left: -50rem;
+  width: 5.25rem;
+  height: 5.3125rem;
+}
+#happy_thumb .decoration .deco_circle_opa {
+  bottom: -9rem;
+  left: 4rem;
+  z-index: -1;
+  width: 24.5rem;
+  height: 24.5rem;
+}
+#happy_thumb .decoration .deco_circle_multiple {
+  bottom: -6.5rem;
+  right: 5.625rem;
+  width: 14.5rem;
+  height: 13rem;
 }
 
 #aboutus {
@@ -61,8 +118,8 @@ ul, li {
   content: "";
   display: block;
   position: absolute;
-  width: 8.625rem;
-  height: 8.625rem;
+  width: 30rem;
+  height: 100%;
   background: url(https://cdn.kdcf.or.kr/kcf/contents/img/portal/main/deco_bottom_left.png);
   background-size: 100% auto;
   background-position: left top;
