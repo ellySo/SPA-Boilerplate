@@ -11,28 +11,61 @@ $(document).ready(function(){
                 $(this).addClass('on') // 지금 클릭한 너만 스타일 넣어
             }
             })
-        })
-    }) //// a.scrollPag click
+        })//// a.scrollPag click
     
-    $('.section').each(function(){ // each 메서드는 다중처리 프로그래밍을 짧게 해주는 효율적인 메서드
+    
+    $('.section').each(function(){ 
         $(this).attr('data-pos', $(this).offset().top)
         // 각자 .section들은 data-pos속성을 만들고 각자의 body 상단에서 떨어지는 상단 위치를 저장해라
     })
 
-    $(window).on('scroll', function(){
+    $(window).on('scroll', function(){    
+
         var scrollPos = $(window).scrollTop();
-         // 스크롤위치 스크롤할때마다 값이 바뀐다.
-        $('.section').each(function(){  // section 마다 스크롤위치가 나의 상단위치랑 비교
-            var thisPos = $(this).offset().top; // 나의 상단위치
-        if( scrollPos > thisPos - 100 ){ // 스크롤위치가 나의 상단위치보다 커지면
-            // 다른 말로 내가 화면에 나오고 있다는 뜻
-            $('#gnb .navia').removeClass('on')
-            $('a[href="#'+$(this).attr('id')+'"]').addClass('on')
-            //그러면 나의 아이디랑 똑같은 href값을 가진 a태그를 활성화해라
-        }
+        $('.section').each(function(){
+            var thisPos = $(this).offset().top;
+            if( scrollPos > thisPos - 100 ){
+                $('#gnb .navia').removeClass('on')
+                $('a[href="#'+$(this).attr('id')+'"]').addClass('on')
+            }
+        })
+        if(scrollPos > 0) {
+            $('#hd').addClass('on')
+        }else{
+            $('#hd').removeClass('on')
+    
+        }   
+
     })
 
- })
+    var num = 0;
+
+    var myroll = setInterval(function(){
+        num++;
+        num %=  $('.culture_item button'). length;
+        myrollingfun(num); // 실행식에서는 진짜 값을 넣어줘야 한다.
+    }, 3000)
+
+    $('.culture_item button').on('click', function(){        
+        clearInterval(myroll); // 자동롤링을 멈춰라
+        num = $(this).parent().index()
+        myrollingfun(num)
+        // 클릭한 버튼의 부모 .culture_item의 순번 0, 1, 2
+
+        myroll = setInterval(function(){
+            num++;
+            num %=  $('.culture_item button').length;
+            myrollingfun(num); // 실행식에서는 진짜 값을 넣어줘야 한다.
+        }, 3000)
+
+     })
+
+    function myrollingfun(x){ // 선택자와 이벤트로 독립
+        $('.culture_item').removeClass('active');
+        $('.culture_item button').eq(x).parent().addClass('active');
+    }
+
+}) 
  /////////////////////////// 클리스 삽입해서 편하게 짜기
 
  // $(this).attr('href') -> #aboutus -> $('#aboutus')
